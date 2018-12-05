@@ -58,6 +58,44 @@ class ErrorMessageTimeoutTrackerMongoDbTest extends TestCase
     /**
      * @test
      */
+    public function shouldReturnNullTrackingInfoIfMessageWasNotTrackedBefore()
+    {
+        $timestamp = '2019-01-01 00:00:00.000000';
+        $id        = 'some id';
+
+        $collection = MongoUtils::collection();
+
+        $errorTracker = new ErrorMessageTimeoutTrackerMongoDb(
+            $collection,
+            new ClockFake($timestamp)
+        );
+
+        $this->assertNull($errorTracker->trackedAt(new MessageDummy($id)));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldNotFailUntrackingMessageNotTrackedBefore()
+    {
+        $timestamp = '2019-01-01 00:00:00.000000';
+        $id        = 'some id';
+
+        $collection = MongoUtils::collection();
+
+        $errorTracker = new ErrorMessageTimeoutTrackerMongoDb(
+            $collection,
+            new ClockFake($timestamp)
+        );
+
+        $errorTracker->untrack(new MessageDummy($id));
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     */
     public function shouldUntrackMessage()
     {
         $timestamp = '2019-01-01 00:00:00.000000';
@@ -74,5 +112,33 @@ class ErrorMessageTimeoutTrackerMongoDbTest extends TestCase
         $errorTracker->untrack(new MessageDummy($id));
 
         $this->assertEmpty($collection->findOne(['_id' => $id]));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldUpdateTrackingIfMessageAlreadyTracked()
+    {
+        $timestamp    = '2019-01-01 00:00:00.000000';
+        $collection   = MongoUtils::collection();
+        $errorTracker = new ErrorMessageTimeoutTrackerMongoDb(
+            $collection,
+            new ClockFake($timestamp)
+        );
+
+        $id = 'some id';
+        $errorTracker->track(new MessageDummy($id));
+
+        $newTimestamp    = '2020-01-01 00:00:00.000000';
+        $collection      = MongoUtils::collection();
+        $errorTracker    = new ErrorMessageTimeoutTrackerMongoDb(
+            $collection,
+            new ClockFake($newTimestamp)
+        );
+
+        $id = 'some id';
+        $errorTracker->track(new MessageDummy($id));
+
+        $this->assertEquals(['_id' => $id, 'timestamp' => $newTimestamp], $collection->findOne(['_id' => $id]));
     }
 }

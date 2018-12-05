@@ -29,17 +29,18 @@ class ErrorMessageTimeoutTrackerMongoDb implements ErrorMessageTimeoutTracker
 
     public function track(Message $message): void
     {
-        $this->collection->insertOne([
-            '_id'       => $message->id(),
-            'timestamp' => $this->clock->now()->format(Clock::MICROSECONDS_FORMAT),
-        ]);
+        $this->collection->replaceOne(
+            ['_id'       => $message->id()],
+            ['_id'    => $message->id(), 'timestamp' => $this->clock->now()->format(Clock::MICROSECONDS_FORMAT)],
+            ['upsert' => true]
+        );
     }
 
-    public function trackedAt(Message $message): \DateTimeImmutable
+    public function trackedAt(Message $message): ?\DateTimeImmutable
     {
         $result = $this->collection->findOne(['_id' => $message->id()]);
 
-        return \DateTimeImmutable::createFromFormat(Clock::MICROSECONDS_FORMAT, $result['timestamp']);
+        return null === $result ? null : \DateTimeImmutable::createFromFormat(Clock::MICROSECONDS_FORMAT, $result['timestamp']);
     }
 
     public function untrack(Message $message): void

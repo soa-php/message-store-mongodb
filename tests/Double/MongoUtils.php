@@ -25,9 +25,9 @@ class MongoUtils
         return self::client()->selectDatabase('test')->withOptions(['typeMap' =>['document' => 'array', 'root' => 'array']]);
     }
 
-    public static function collection(): Collection
+    public static function collection(string $collectionName = 'test'): Collection
     {
-        return self::database()->selectCollection('test');
+        return self::database()->selectCollection($collectionName);
     }
 
     public static function clean()

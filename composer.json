@@ -6,7 +6,7 @@
     "php": "^7.2",
     "mongodb/mongodb": "^1.4",
     "soa-php/message-store": "^1.0",
-    "soa-php/identifier-generator": "^1.0",
+    "soa-php/identifier-generator-mongodb": "^1.0",
     "ext-mongodb": "*"
   },
   "require-dev": {

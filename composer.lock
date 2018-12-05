@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3adcc09ace3b7b7ff29d3364a0db6160",
+    "content-hash": "fc19a2c76674ef6ebf6834deceadbe55",
     "packages": [
         {
             "name": "mongodb/mongodb",
@@ -397,17 +397,49 @@
             "time": "2018-12-04T15:42:09+00:00"
         },
         {
+            "name": "soa-php/identifier-generator-mongodb",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/soa-php/identifier-generator-mongodb.git",
+                "reference": "e5dcfda5fe9182eda3917b669025f0272ad22bb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/soa-php/identifier-generator-mongodb/zipball/e5dcfda5fe9182eda3917b669025f0272ad22bb5",
+                "reference": "e5dcfda5fe9182eda3917b669025f0272ad22bb5",
+                "shasum": ""
+            },
+            "require": {
+                "mongodb/mongodb": "^1.4",
+                "php": "^7.2",
+                "soa-php/identifier-generator": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Soa\\IdentifierGeneratorMongoDb\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generate identifiers based on a MongoDb collection",
+            "time": "2018-12-05T02:25:21+00:00"
+        },
+        {
             "name": "soa-php/message-store",
             "version": "1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/soa-php/message-store.git",
-                "reference": "906508994ba8d3c69e5990841e054708b5a0ceca"
+                "reference": "e8e71a3d1b27df280d7021e5cd5f070d08e3232e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/soa-php/message-store/zipball/906508994ba8d3c69e5990841e054708b5a0ceca",
-                "reference": "906508994ba8d3c69e5990841e054708b5a0ceca",
+                "url": "https://api.github.com/repos/soa-php/message-store/zipball/e8e71a3d1b27df280d7021e5cd5f070d08e3232e",
+                "reference": "e8e71a3d1b27df280d7021e5cd5f070d08e3232e",
                 "shasum": ""
             },
             "require": {
@@ -432,7 +464,7 @@
                 "MIT"
             ],
             "description": "Persist messages and publish/subscribe them to/from a broker",
-            "time": "2018-12-05T02:26:59+00:00"
+            "time": "2018-12-05T12:54:25+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",

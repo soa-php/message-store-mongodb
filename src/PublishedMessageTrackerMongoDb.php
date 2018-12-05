@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MessageStoreMongoDb;
+namespace Soa\MessageStoreMongoDb;
 
 use MongoDB\Collection;
 use Soa\MessageStore\Publisher\PublishedMessageTracker;

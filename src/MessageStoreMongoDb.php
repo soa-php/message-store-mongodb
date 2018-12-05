@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace MessageStoreMongoDb;
+namespace Soa\MessageStoreMongoDb;
 
 use MongoDB\BSON\UTCDateTime;
 use MongoDB\Collection;
 use Soa\IdentifierGenerator\IdentifierGenerator;
+use Soa\IdentifierGeneratorMongoDb\IdentifierGeneratorAutoIncrementMongoDb;
 use Soa\MessageStore\Message;
 use Soa\MessageStore\MessageStore;
 use Soa\MessageStore\Publisher\StoredMessage;
@@ -23,7 +24,7 @@ class MessageStoreMongoDb implements MessageStore
      */
     private $identifierGenerator;
 
-    public function __construct(Collection $collection, IdentifierGenerator $identifierGenerator)
+    public function __construct(Collection $collection, IdentifierGeneratorAutoIncrementMongoDb $identifierGenerator)
     {
         $this->collection          = $collection;
         $this->identifierGenerator = $identifierGenerator;
